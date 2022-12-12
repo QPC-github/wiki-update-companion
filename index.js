@@ -7,7 +7,7 @@ async function upgrade (name, version) {
   console.info(`Finding ${name} container...`)
   const containers = await dk.listContainers({ all: true })
   const wiki = containers.find(c => {
-    return c.Names.some(n => n === `/${name}` || n === name) && c.Image.startsWith('ghcr.io/ietf-tools/wiki')
+    return c.Names.some(n => (n === `/${name}` || n === name) && n.startsWith('/wiki'))
   })
   if (!wiki) {
     throw new Error(`Could not find ${name} container.`)
